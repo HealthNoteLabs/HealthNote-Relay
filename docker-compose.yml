@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  # Main relay
+  relay:
+    build:
+      context: ./relay
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://user:password@postgres:5432/nostrhealthrelay
+    depends_on:
+      - postgres
+    restart: unless-stopped
+  
+  # Blossom node
+  blossom:
+    build:
+      context: ./blossom
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - BLOSSOM_PUBKEY=${BLOSSOM_PUBKEY:-}
+      - CONTACT_EMAIL=${CONTACT_EMAIL:-}
+    restart: unless-stopped
+    depends_on:
+      - relay
+  
+  # Database
+  postgres:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=nostrhealthrelay
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+volumes:
+  postgres_data: 
