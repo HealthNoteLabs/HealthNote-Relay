@@ -106,6 +106,18 @@ Blossom nodes can be configured through environment variables:
 - `CONTACT_EMAIL`: Contact email for the Blossom node
 - `STORAGE_TYPE`: Storage backend type (default: level)
 
+## Privacy Policy and Terms of Use
+
+We believe that transparency about data practices is essential, especially for health and fitness data. Our comprehensive [Privacy Policy and Terms of Use](docs/privacy-policy.md) outlines:
+
+- Our commitment to user data sovereignty
+- How we implement the three-tiered privacy model
+- Our no-tracking and no-selling guarantees
+- User rights and controls over their data
+- Security measures to protect your information
+
+HealthNote-Relay is built on the principle that your health data belongs to you alone. We are committed to providing a relay service that respects user sovereignty and privacy as foundational values, not afterthoughts.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
