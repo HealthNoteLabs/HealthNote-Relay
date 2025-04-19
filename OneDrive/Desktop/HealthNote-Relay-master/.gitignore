@@ -1,0 +1,22 @@
+# Node.js dependencies
+node_modules/
+
+# Blossom node data files
+blossom/data/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
+.env
+
+# OS specific files
+.DS_Store
+Thumbs.db 
