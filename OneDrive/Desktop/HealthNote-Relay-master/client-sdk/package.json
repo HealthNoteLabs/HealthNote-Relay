@@ -1,0 +1,20 @@
+{
+  "name": "health-nostr-client",
+  "version": "0.1.0",
+  "description": "Client SDK for Health & Fitness Relay with Blossom integration",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc --watch",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "nostr-tools": "^1.12.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "vitest": "^0.30.1"
+  },
+  "license": "MIT"
+} 

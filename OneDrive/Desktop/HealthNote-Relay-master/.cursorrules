@@ -1,0 +1,56 @@
+# HealthNote-Relay Cursor Rules
+
+## Project Patterns
+
+### Code Organization
+- Go code follows standard Go project layout
+- Node.js code uses CommonJS modules
+- TypeScript code uses ESM modules
+
+### Naming Conventions
+- Go: camelCase for private fields, PascalCase for exported fields/functions
+- JavaScript/TypeScript: camelCase for variables/functions, PascalCase for classes
+- Files: kebab-case for JavaScript/TypeScript files, snake_case for Go files
+
+### Architecture Patterns
+- Main relay should extend the relayer framework's DefaultRelay
+- Blossom node should follow the Express.js middleware pattern
+- Client SDK should provide a fluent interface for queries
+
+### Health Data Handling
+- Health events use kind numbers in the range 32018-32048
+- Workout events use kind numbers 1301 (records), 33401 (exercise templates), 33402 (workout templates)
+- Privacy classification is done via tags on events
+- Encryption follows NIP-04 standard
+- Data retention is controlled via "expires_at" tags
+
+### Workout Events (NIP-101e)
+- Exercise Templates (kind 33401) define reusable exercise components
+- Workout Templates (kind 33402) define workout plans composed of exercises
+- Workout Records (kind 1301) record completed workouts
+- Exercise references use the "exercise" tag with optional template references
+- Workout events should include appropriate "title" and "type" tags
+- Split data is stored in "split" tags with measurement details
+- Default privacy: Exercise/Workout Templates are public, Workout Records are limited
+
+## Implementation Specifics
+
+### Relay
+- BlossomAwareRelay must track available Blossom nodes
+- Privacy classifier should inspect event kinds and tags
+- PostgreSQL schema needs efficient indices for health kinds and workout kinds
+- Workout records require specialized query support
+
+### Blossom Node
+- Should support both LevelDB and SQLite as storage backends
+- Must implement WebSocket for real-time updates
+- Should handle encryption/decryption of events
+- Should index workout records by title and type
+- Should index exercise templates by title for efficient lookup
+
+### Client SDK
+- Should auto-detect appropriate storage for events
+- Must handle connection management to multiple endpoints
+- Should provide clear privacy controls for users
+- Must implement specialized methods for workout data management
+- Should handle references between events 
